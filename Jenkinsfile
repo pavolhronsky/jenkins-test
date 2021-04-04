@@ -1,11 +1,22 @@
 pipeline {
-  agent {
-    docker { image 'node:14-alpine' }
-    }
+  environment {
+    dockerRegistry = "phronsky"
+    dockerImage = "test-image"
+    dockerImageTag = "v0.1"
+  }
+  agent any
   stages {
-    stage('Test') {
+    stage('Cloning our Git') {
       steps {
-        sh 'node --version'
+        git 'git@github.com:pavolhronsky/jenkins-test.git'
+      }
+    }
+    stage('Building our image') {
+      steps {
+        script {
+          echo "$BUILD_NUMBER"
+          dockerImage = docker.build dockerRegistry + "/" + dockerImage + ":" + dockerImageTag
+        }
       }
     }
   }
