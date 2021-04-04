@@ -6,11 +6,11 @@ pipeline {
   }
   agent any
   stages {
-    stage('Cloning our Git') {
-      steps {
-        git 'git@github.com:pavolhronsky/jenkins-test.git'
-      }
-    }
+//    stage('Cloning our Git') {
+//      steps {
+//        git 'git@github.com:pavolhronsky/jenkins-test.git'
+//      }
+//    }
     stage('Building our image') {
       steps {
         script {
